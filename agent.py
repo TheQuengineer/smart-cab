@@ -18,12 +18,12 @@ class LearningAgent(Agent):
         self.Q = dict()          # Create a Q-table which will be a dictionary of tuples
         self.epsilon = epsilon   # Random exploration factor
         self.alpha = alpha       # Learning factor
-
+        
         ###########
         ## TO DO ##
         ###########
         # Set any additional class parameters as needed
-
+        self.t = 1
 
 
     def reset(self, destination=None, testing=False):
