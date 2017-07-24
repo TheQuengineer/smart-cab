@@ -11937,7 +11937,7 @@ div#notebook {
 <li><code>enforce_deadline</code> A boolean that can be set to True or False. This can be used to encourage a completion of the simulation by a specific time frame so that the network is encouraged to get to the end in a timely manner. It can be turned off to see how this affects the networks incentive to finish the simulation.</li>
 <li><code>epsilon</code> This is a floating point value that can be used in the greedy epsilon algorithm to determine the exploration vs. exploit balance for the algorithm. It bassically can be used by pulling a random probability and measuring if the probability is less than epsilon setting, if the epsilon value is greater then it will take a random action, however if not it will execute the best action.</li>
 </ol>
-<h3 id="environment.py-section">environment.py section<a class="anchor-link" href="#environment.py-section">&#182;</a></h3><p>When an agent performs an action it calls the sense function. There is also a class attribute that is called valid actions that an agent can use to lookup the list of actions it can take.(Not sure about this question because Environment class has all instance methods and no class methods. There doesn't seem to be any class functions in environments.py that belong to the class itself, is there a typo in the question?.</p>
+<h3 id="environment.py-section">environment.py section<a class="anchor-link" href="#environment.py-section">&#182;</a></h3><p>When an agent performs an action it calls the act function. There is also a class attribute that is called valid actions that an agent can be used to lookup the list of actions it can take.</p>
 <h3 id="simulator.py-section">simulator.py section<a class="anchor-link" href="#simulator.py-section">&#182;</a></h3><ul>
 <li>render_text() shows all the simulator data in the terminal</li>
 <li>render() shows all the simulator data in the UI window during game execution</li>
@@ -13113,7 +13113,7 @@ mVmVOMEyMzMzMzOrkv8Du62Sc+kI4sAAAAAASUVORK5CYII=
 <p>The Rate of reliability chart makes perfect sense because the line stayed relatively flat just under 10%. This is expected as the Agent has not done any learning whats so ever, and the actions have been completely random.</p>
 <p>The Agents reward chart shows that the trials only resulted in negative rewards for all the actions taken. There was also a slight uptick of negative rewards toward the end of the trial run. It suggests that the punishments to the Agent were penalized heavily.</p>
 <p>All charts have the commonality of a consistent results regardless of the number of trials. More trials do not mean that the Agent will get better with this current approach.</p>
-<p>The final consensus shows that the Agent gets an <code>F</code> in safety as well as a <code>F</code> in Reliability. I would have to conclude that it is not at all safe nor reliable for any passenger because there are too many instances of accidents as well as extremeley low liability percentages so a customer is better off not using it.</p>
+<p>The final consensus shows that the Agent gets an <code>F</code> in safety as well as a <code>F</code> in Reliability. I would have to conclude that it is not at all safe nor reliable for any passenger because there are too many instances of accidents as well as extremeley low liability percentages so a customer is better off not using it. Based on the data above about 25% of the accidents are caused by bad decisions of the Agent.</p>
 <p>**</p>
 
 </div>
@@ -13167,9 +13167,15 @@ mVmVOMEyMzMzMzOrkv8Du62Sc+kI4sAAAAAASUVORK5CYII=
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>**Answer:</p>
-<p>Oncoming is definately a relevant learning feature as it ties directly to safety. We wouldn't want a car that can't discern what was happening with oncoming traffic. Next I would say deadline would be tied to efficiency, because if the Agent learned to get to a specific destination before running out of time this would increase the efficiency of the Agent as it would be able to transport passengers much more quickly. These features are important to model in the environment as they are the bulk of what makes a cab usable to anybody that would be expecting to ride in one. Of all the things a cab can be, it is likely that safetly &amp; efficiency would be at the top of the list.</p>
-<p>The other features that were not chosen were not chosen, because I felt those features were more about describing the environment, and not the objective. for example, waypoint has to do with the direction the cab is driving, and that doesn't really matter when looking at safety and efficiency.</p>
-<p>**</p>
+<p>After thinking about this problem a little more I finally decided on 4 different state values for this Agent to learn safety and reliability.</p>
+<ul>
+<li>Waypoint: Waypoint was chosen because this allows the Agent to know where it is going. This is neccessary for reliability, because without knowing the path it is taking the Agent might never reach its destination.</li>
+<li>Left: Was chosen because most of the turns a car makes that would require caution are left based turns. Left turns are considered very dangerous for driving, so much so that even delivery companies like UPS tends to avoid them <a href="http://bigthink.com/robby-berman/the-science-behind-why-ups-trucks-avoid-making-left-turns">a good article on this topic</a>. If our Agent learns to do this action successfully this would be a good boost to the Agent learning safety</li>
+<li>oncoming: Oncoming was chosen because this will be tied to safety as well. This will allow the Agent to increase its safety rating once it learns this as well, becuase Oncoming traffic accidents can be deadly. Learning to watch for this is a neccessity. </li>
+<li>Light: Finally, the traffic light would be neccessary as it is the base rule for safe driving. If the traffic light rules are followed this can be good for efficiency and safety. Safety because it allows you to get to your destination without causing harm to others on the road, and efficiency because it times the stop go cycles of traffic which ensures traffic is spread out and orderly.</li>
+</ul>
+<p>The feature not chosen was <code>Right</code> as it is a much easier and safer of a turn to make in driving circles and the agent should learn this one much easier.
+**</p>
 
 </div>
 </div>
@@ -13203,7 +13209,7 @@ mVmVOMEyMzMzMzOrkv8Du62Sc+kI4sAAAAAASUVORK5CYII=
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>**Answer:</p>
-<p>In question 2 I chose 2 features that can be in any number of state spaces. So the actual calculation would be exponential. <code>2^n</code> is worse case scenario because the amount of the environment that would need to be explored would grow exponentially making it impossible for the agent to explore all of those state spaces. It would be impossible to learn an affective policy.</p>
+<p>In question 4 I chose 4 features that can be in any number of state spaces. Based on the environment the state space can by looking at the grid size. The environment grid size is 8 * 6 = 48. There are 48 total sections on the grid, but based on the features I've chosen it can be expressed as 4^48. This means that the possible state space is <code>7.9228163e+28</code>. This is a vast state space that would definately require a specific learning algorithm that will help it reduce the need to explore all these options and many training trials to accomplish this without Q-learning.</p>
 <p>**</p>
 
 </div>
@@ -14414,8 +14420,16 @@ Rv4fuWVFY8LtauQAAAAASUVORK5CYII=
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>**Answer:</p>
-<p>There are similar observations between the basic driving agent and the default Q learning Agent. Both of them failed in both safety and reliability rating. There were about 3 training trials before the Agent required before testing. The number makes sense as the epsilon tolerance was set to 0.05. The decaying function is represented in top left chart as we can see a drop off in total bad actions. It seems as the number of training trials increased the number of bad actions did decrease until it stabalized at trial 18 or so. The average reward began to increase as the trial runs went on. Unfortuantely, there was no noticable change in the reliability and the safety grade for the Agent after these changes.</p>
-<p>**</p>
+<ul>
+<li><p>There are similar observations between the basic driving agent and the default Q learning Agent. Both of them failed in both safety and reliability rating. There were about 20 training trials before the sim-default-learning Agent utilized before it started testing as well as the sim_no_learning Agent. Both agents utilized an epsilon of 1.0. Whats also interesting is both agents had one successful training trial, and one successful test trial. The rest of the trials were failed.</p>
+</li>
+<li><p>The Agent required twenty training trials before testing</p>
+</li>
+<li>The decaying function represented shows a even decline in chart number 4. Because each trial we subtracted 0.05 from the current epsilon, by the time we reached twenty trials we had reached an epsilon of 0.</li>
+<li>Total bad accidents seemed to decrease around trial 18. So this indicates that the Agent definately had a lower number of Bad actions as more trials went on. The Average reward also began to increase right at 18 trials as well.</li>
+<li>Both Agents had a <code>F</code> for safety and reliability so there was no major difference here.
+**</li>
+</ul>
 
 </div>
 </div>
@@ -16094,23 +16108,33 @@ YII=
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>**Answer:</p>
-<div class="highlight"><pre><span></span>Agent previous state: <span class="o">(</span><span class="s1">&#39;right&#39;</span>, <span class="s1">&#39;None&#39;</span>, <span class="s1">&#39;red&#39;</span>, <span class="s1">&#39;forward&#39;</span><span class="o">)</span>
-Agent followed the waypoint right. <span class="o">(</span>rewarded <span class="m">1</span>.61<span class="o">)</span>
-<span class="m">93</span>% of <span class="nb">time</span> remaining to reach destination
+<div class="highlight"><pre><span></span><span class="o">(</span><span class="s1">&#39;left&#39;</span>, <span class="s1">&#39;forward&#39;</span>, <span class="s1">&#39;green&#39;</span>, <span class="s1">&#39;left&#39;</span><span class="o">)</span>
+ -- forward : <span class="m">0</span>.07
+ -- None : <span class="m">0</span>.00
+ -- right : <span class="m">0</span>.00
+ -- left : <span class="m">0</span>.00
 </pre></div>
-<div class="highlight"><pre><span></span>Agent previous state: <span class="o">(</span><span class="s1">&#39;forward&#39;</span>, <span class="s1">&#39;None&#39;</span>, <span class="s1">&#39;red&#39;</span>, <span class="s1">&#39;left&#39;</span><span class="o">)</span>
-Agent properly idled at a red light. <span class="o">(</span>rewarded <span class="m">1</span>.68<span class="o">)</span>
-<span class="m">90</span>% of <span class="nb">time</span> remaining to reach destination.
+<ul>
+<li>For this first action in the output file this is a good policy as the agent had a green light and had the ability to turn left or go forward. All the other action values like none right and left were zeros and the Agent decided to go forward as it was the only one with a q-value.</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="o">(</span><span class="s1">&#39;right&#39;</span>, <span class="s1">&#39;forward&#39;</span>, <span class="s1">&#39;green&#39;</span>, <span class="s1">&#39;None&#39;</span><span class="o">)</span>
+ -- forward : <span class="m">0</span>.00
+ -- None : -1.02
+ -- right : <span class="m">0</span>.00
+ -- left : <span class="m">0</span>.00
 </pre></div>
-<div class="highlight"><pre><span></span>Agent previous state: <span class="o">(</span><span class="s1">&#39;left&#39;</span>, <span class="s1">&#39;left&#39;</span>, <span class="s1">&#39;green&#39;</span>, <span class="s1">&#39;None&#39;</span><span class="o">)</span>
-Agent followed the waypoint left. <span class="o">(</span>rewarded <span class="m">0</span>.99<span class="o">)</span>
-<span class="m">73</span>% of <span class="nb">time</span> remaining to reach destination.
+<ul>
+<li>Another good example here where the agent was in a state of right forward green and none, but the none option yields a negative reward which waould be different than what I would expect from an optimal policy. However, it is possible that this was the best action to take at the time.</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="o">(</span><span class="s1">&#39;right&#39;</span>, <span class="s1">&#39;None&#39;</span>, <span class="s1">&#39;red&#39;</span>, <span class="s1">&#39;None&#39;</span><span class="o">)</span>
+ -- forward : -2.17
+ -- None : <span class="m">0</span>.14
+ -- right : <span class="m">0</span>.00
+ -- left : -0.87
 </pre></div>
-<div class="highlight"><pre><span></span>Agent previous state: <span class="o">(</span><span class="s1">&#39;forward&#39;</span>, <span class="s1">&#39;forward&#39;</span>, <span class="s1">&#39;green&#39;</span>, <span class="s1">&#39;right&#39;</span><span class="o">)</span>
-Agent drove right instead of forward. <span class="o">(</span>rewarded <span class="m">0</span>.70<span class="o">)</span>
-<span class="m">77</span>% of <span class="nb">time</span> remaining to reach destination.
-</pre></div>
-<p>I listed a few output scenarios from the test runs and it looks like the Agent often chose the correct policy for the given state. Most of the Agents choices were designed to give it at least a reword close to 1.0 or more, which I found interesting. Very rarely did the agent make a choice that would degrade the reward in a negative fashion. There were situations where the agent didn't choose the optimal policy, but instead chose a safer one. In these cases it looks like the agent sacraficed time of reaching a destination in order to ensure safety, which is good. In the examples above we can see how the agent idled at the red light appropriately. The agent also followed the waypoints and made turns at the appropriate times even though the reward wasn't that much. These actions are the correct policy because the Agent reached the destination in time, and didn't sacrifice safety which is what I was working to achieve.</p>
+<ul>
+<li>One final interesting point in the log was above. The agent chose pretty well here as right didn't yield any reward but it was chosen, and None was chosen even though it had only a 0.14 Q-value. That 0.14 Q-value was a better option than all the other ones that were listed so in this case this was an optimal choice by the agent.</li>
+</ul>
 <p>**</p>
 
 </div>
