@@ -13108,12 +13108,12 @@ mVmVOMEyMzMzMzOrkv8Du62Sc+kI4sAAAAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>**Answer:</p>
-<p>Viewing the first chart in the top right corner we can analyze all the bad actions taken by the agent. It's clear from the chart that the relative frequency for total bad actions was hovering around 0.3952. This trend stayed steady even as the trial number increased. We can also notice that all of the other catagories in this same chart stayed consistent without much improvement from trial to trial. As far as accidents go, the relative frequency seems to be hovering at about 0.0494 for this agent. It seems that major accidents happend at the beginning of the trials more so than at the end.</p>
-<p>The Rate of reliability chart makes perfect sense because the line stayed relatively flat just under 10%. This is expected as the Agent has not done any learning whats so ever, and the actions have been completely random.</p>
-<p>The Agents reward chart shows that the trials only resulted in negative rewards for all the actions taken. There was also a slight uptick of negative rewards toward the end of the trial run. It suggests that the punishments to the Agent were penalized heavily.</p>
-<p>All charts have the commonality of a consistent results regardless of the number of trials. More trials do not mean that the Agent will get better with this current approach.</p>
-<p>The final consensus shows that the Agent gets an <code>F</code> in safety as well as a <code>F</code> in Reliability. I would have to conclude that it is not at all safe nor reliable for any passenger because there are too many instances of accidents as well as extremeley low liability percentages so a customer is better off not using it. Based on the data above about 25% of the accidents are caused by bad decisions of the Agent.</p>
+<p><strong>Answer</strong></p>
+<p>Viewing the first chart in the top right corner we can analyze all the bad actions taken by the agent. It's clear from the chart that the relative frequency for total bad actions was hovering around 0.3952. This trend stayed steady even as the trial number increased. We can also notice that all of the other catagories in this same chart stayed consistent without much improvement from trial to trial. As far as accidents go, the relative frequency seems to be hovering at about 0.0494 for this agent. It seems that major accidents happend at the beginning of the trials more so than at the end.
+The Rate of reliability chart makes perfect sense because the line stayed relatively flat just under 10%. This is expected as the Agent has not done any learning whats so ever, and the actions have been completely random.
+The Agents reward chart shows that the trials only resulted in negative rewards for all the actions taken. There was also a slight uptick of negative rewards toward the end of the trial run. It suggests that the punishments to the Agent were penalized heavily.
+All charts have the commonality of a consistent results regardless of the number of trials. More trials do not mean that the Agent will get better with this current approach.
+The final consensus shows that the Agent gets an F in safety as well as a F in Reliability. I would have to conclude that it is not at all safe nor reliable for any passenger because there are too many instances of accidents as well as extremeley low liability percentages so a customer is better off not using it. Based on the data above about 25% of the accidents are caused by bad decisions of the Agent.</p>
 <p>**</p>
 
 </div>
@@ -13168,14 +13168,12 @@ mVmVOMEyMzMzMzOrkv8Du62Sc+kI4sAAAAAASUVORK5CYII=
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>**Answer:</p>
 <p>After thinking about this problem a little more I finally decided on 4 different state values for this Agent to learn safety and reliability.</p>
-<ul>
-<li>Waypoint: Waypoint was chosen because this allows the Agent to know where it is going. This is neccessary for reliability, because without knowing the path it is taking the Agent might never reach its destination.</li>
-<li>Left: Was chosen because most of the turns a car makes that would require caution are left based turns. Left turns are considered very dangerous for driving, so much so that even delivery companies like UPS tends to avoid them <a href="http://bigthink.com/robby-berman/the-science-behind-why-ups-trucks-avoid-making-left-turns">a good article on this topic</a>. If our Agent learns to do this action successfully this would be a good boost to the Agent learning safety</li>
-<li>oncoming: Oncoming was chosen because this will be tied to safety as well. This will allow the Agent to increase its safety rating once it learns this as well, becuase Oncoming traffic accidents can be deadly. Learning to watch for this is a neccessity. </li>
-<li>Light: Finally, the traffic light would be neccessary as it is the base rule for safe driving. If the traffic light rules are followed this can be good for efficiency and safety. Safety because it allows you to get to your destination without causing harm to others on the road, and efficiency because it times the stop go cycles of traffic which ensures traffic is spread out and orderly.</li>
-</ul>
-<p>The feature not chosen was <code>Right</code> as it is a much easier and safer of a turn to make in driving circles and the agent should learn this one much easier.
-**</p>
+<p><code>Waypoint:</code> Waypoint was chosen because this allows the Agent to know where it can go. This is neccessary for reliability, because without knowing the path it can take the Agent might never reach its destination.</p>
+<p><code>Left:</code> Allows the Agent to know what is happening around it as a car around it is going left. This will help the Agent determine what best action to take in this situation. For example, if a vehicle is turning Left the Agent will need to know what is the best course of action with safety and efficiency in mind.</p>
+<p><code>oncoming:</code>  This is neccessary for a healthy safety rating once it learns this as well, because Oncoming traffic accidents can be deadly. Learning to watch for this is a neccessity.</p>
+<p><code>Light:</code> Finally, the traffic light would be neccessary as it is the base rule for safe driving. If the traffic light rules are followed this can be good for efficiency and safety. Safety because it allows you to get to your destination without causing harm to others on the road, and efficiency because it times the stop go cycles of traffic which ensures traffic is spread out and orderly.
+The feature not chosen was Right as it can be learned once the left feature is learned as they would have the same constraints. We would not want the vehicle to collide with anyone on the left side just like we would not want the vehicle to collide with antything on the right.</p>
+<p>**</p>
 
 </div>
 </div>
@@ -13209,7 +13207,7 @@ mVmVOMEyMzMzMzOrkv8Du62Sc+kI4sAAAAAASUVORK5CYII=
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>**Answer:</p>
-<p>In question 4 I chose 4 features that can be in any number of state spaces. Based on the environment the state space can by looking at the grid size. The environment grid size is 8 * 6 = 48. There are 48 total sections on the grid, but based on the features I've chosen it can be expressed as 4^48. This means that the possible state space is <code>7.9228163e+28</code>. This is a vast state space that would definately require a specific learning algorithm that will help it reduce the need to explore all these options and many training trials to accomplish this without Q-learning.</p>
+<p>In question 4 I chose 4 features that can be in any number of state spaces. Based on the environment the state space can by looking at the grid size. The environment grid size is 8 * 6 = 48. There are 48 total sections on the grid, but based on the features I've chosen it can be expressed as 4^48. This means that the possible state space is 7.9228163e+28. This is a vast state space that would definately require a specific learning algorithm that will help it reduce the need to explore all these options and many training trials to accomplish this without Q-learning.</p>
 <p>**</p>
 
 </div>
@@ -14420,16 +14418,12 @@ Rv4fuWVFY8LtauQAAAAASUVORK5CYII=
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>**Answer:</p>
-<ul>
-<li><p>There are similar observations between the basic driving agent and the default Q learning Agent. Both of them failed in both safety and reliability rating. There were about 20 training trials before the sim-default-learning Agent utilized before it started testing as well as the sim_no_learning Agent. Both agents utilized an epsilon of 1.0. Whats also interesting is both agents had one successful training trial, and one successful test trial. The rest of the trials were failed.</p>
-</li>
-<li><p>The Agent required twenty training trials before testing</p>
-</li>
-<li>The decaying function represented shows a even decline in chart number 4. Because each trial we subtracted 0.05 from the current epsilon, by the time we reached twenty trials we had reached an epsilon of 0.</li>
-<li>Total bad accidents seemed to decrease around trial 18. So this indicates that the Agent definately had a lower number of Bad actions as more trials went on. The Average reward also began to increase right at 18 trials as well.</li>
-<li>Both Agents had a <code>F</code> for safety and reliability so there was no major difference here.
-**</li>
-</ul>
+<p>There are similar observations between the basic driving agent and the default Q learning Agent. Both of them failed in both safety and reliability rating. There were about 20 training trials before the sim-default-learning Agent utilized before it started testing as well as the sim_no_learning Agent. Both agents utilized an epsilon of 1.0. Whats also interesting is both agents had one successful training trial, and one successful test trial. The rest of the trials were failed.
+The Agent required twenty training trials before testing
+The decaying function represented shows a even decline in chart number 4. Because each trial we subtracted 0.05 from the current epsilon, by the time we reached twenty trials we had reached an epsilon of 0.
+Total bad accidents seemed to decrease around trial 18. So this indicates that the Agent definately had a lower number of Bad actions as more trials went on. The Average reward also began to increase right at 18 trials as well.
+Both Agents had a F for safety and reliability so there was no major difference here.</p>
+<p>**</p>
 
 </div>
 </div>
@@ -16108,34 +16102,22 @@ YII=
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>**Answer:</p>
+<p>Based on the inputs I've chosen of waypoint, left, light, oncoming an optimal policy would be to look at the environment given the state of these 4 features and determine whether the Agent chose a safe, and reliable decision. This decision for the best action would be considered the optimal policy. For example. If there is an car turning left and a car turning right and the waypoint is None, and the light is red then the optimal policy I'd expect the Agent to find is to remain idle. This appropriate policy will ensure safety and reliability.</p>
 <div class="highlight"><pre><span></span><span class="o">(</span><span class="s1">&#39;left&#39;</span>, <span class="s1">&#39;forward&#39;</span>, <span class="s1">&#39;green&#39;</span>, <span class="s1">&#39;left&#39;</span><span class="o">)</span>
  -- forward : <span class="m">0</span>.07
  -- None : <span class="m">0</span>.00
  -- right : <span class="m">0</span>.00
  -- left : <span class="m">0</span>.00
 </pre></div>
-<ul>
-<li>For this first action in the output file this is a good policy as the agent had a green light and had the ability to turn left or go forward. All the other action values like none right and left were zeros and the Agent decided to go forward as it was the only one with a q-value.</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="o">(</span><span class="s1">&#39;right&#39;</span>, <span class="s1">&#39;forward&#39;</span>, <span class="s1">&#39;green&#39;</span>, <span class="s1">&#39;None&#39;</span><span class="o">)</span>
- -- forward : <span class="m">0</span>.00
- -- None : -1.02
- -- right : <span class="m">0</span>.00
- -- left : <span class="m">0</span>.00
+<p>This action the agent chose to go forward as it had the highest reward, but left didn't have any value here when it would have been a optimal action. This is a good example  of a policy state that is different that an expected optimal policy especially sense the Agent didn't have a q-value associated to the left turn.</p>
+<div class="highlight"><pre><span></span><span class="o">(</span><span class="s1">&#39;forward&#39;</span>, <span class="s1">&#39;None&#39;</span>, <span class="s1">&#39;green&#39;</span>, <span class="s1">&#39;None&#39;</span><span class="o">)</span>
+ -- forward : <span class="m">0</span>.06
+ -- None : -1.23
+ -- right : <span class="m">0</span>.09
+ -- left : <span class="m">0</span>.08
 </pre></div>
-<ul>
-<li>Another good example here where the agent was in a state of right forward green and none, but the none option yields a negative reward which waould be different than what I would expect from an optimal policy. However, it is possible that this was the best action to take at the time.</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="o">(</span><span class="s1">&#39;right&#39;</span>, <span class="s1">&#39;None&#39;</span>, <span class="s1">&#39;red&#39;</span>, <span class="s1">&#39;None&#39;</span><span class="o">)</span>
- -- forward : -2.17
- -- None : <span class="m">0</span>.14
- -- right : <span class="m">0</span>.00
- -- left : -0.87
-</pre></div>
-<ul>
-<li>One final interesting point in the log was above. The agent chose pretty well here as right didn't yield any reward but it was chosen, and None was chosen even though it had only a 0.14 Q-value. That 0.14 Q-value was a better option than all the other ones that were listed so in this case this was an optimal choice by the agent.</li>
-</ul>
-<p>**</p>
+<p>Above is a good example of a correct policy. For example the waypoint was forward, and there was no car to the left and the light was green, and there was no oncoming traffic. The Agent had three good options. The agent could have gone left, right, or forward and all of those options have positive rewards. Choosing None would be really dangerous as the light was green and it could have caused an accident here. In this case the optimal policy would have been to turn Right, but either of the other 3 would have been ok.
+**</p>
 
 </div>
 </div>

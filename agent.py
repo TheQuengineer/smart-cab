@@ -126,7 +126,7 @@ class LearningAgent(Agent):
         # Be sure that when choosing an action with highest Q-value that you randomly select between actions that "tie".
         p = random.random()
         if self.learning:
-            if self.epsilon > 0.01 and self.epsilon > p:
+            if p < self.epsilon:
                 action = random.choice(self.valid_actions)
             else:
                 best_actions = []
